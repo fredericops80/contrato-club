@@ -1,0 +1,23 @@
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.env
+.venv
+env/
+venv/
+.DS_Store
+
+# Streamlit
+.streamlit/secrets.toml
+
+# Generated Files
+*.pdf
+assets/assinatura_cliente.png
+assets/assinatura_*.png
+!assets/assinatura_micaela.png
+/tmp/
+
+# Logs
+*.log
