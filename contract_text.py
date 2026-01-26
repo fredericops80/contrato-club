@@ -55,7 +55,7 @@ CLUBE + ESTETICA 3.0
 
 Pelo presente instrumento particular, as partes abaixo qualificadas celebram este contrato de prestacao de servicos:
 
-CONTRATADA: MICAELA SAMPAIO, doravante denominada apenas CONTRATADA.
+CONTRATADA: {contratada_nome}, NIF {contratada_nif}, com sede em {contratada_endereco}, doravante denominada apenas CONTRATADA.
 
 CONTRATANTE: 
 Nome: {nome}
@@ -263,6 +263,9 @@ def get_contrato_completo(dados: dict) -> str:
         email=dados.get('email', ''),
         whatsapp=dados.get('whatsapp', ''),
         endereco=dados.get('endereco', ''),
+        contratada_nome=dados.get('contratada_nome', 'MICAELA SAMPAIO'),
+        contratada_nif=dados.get('contratada_nif', ''),
+        contratada_endereco=dados.get('contratada_endereco', ''),
         plano_escolhido=plano_escolhido,
         reagendamentos_info=reagendamentos_info,
         desconto_extras=desconto_extras,

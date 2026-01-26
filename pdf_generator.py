@@ -14,15 +14,19 @@ ASSETS_DIR = "assets"
 MICAELA_SIGNATURE_PATH = os.path.join(ASSETS_DIR, "assinatura_micaela.png")
 
 class ContractPDF(FPDF):
-    def __init__(self, orientation='P', unit='mm', format='A4', signature_data=None):
+    def __init__(self, orientation='P', unit='mm', format='A4', signature_data=None, company_data=None):
         super().__init__(orientation, unit, format)
-        self.signature_data = signature_data # Dados da assinatura do cliente (base64)
+        self.signature_data = signature_data
+        # Dados padrão caso não seja fornecido
+        self.company_name = "MICAELA SAMPAIO"
+        if company_data:
+            self.company_name = company_data.get('contratada_nome', "MICAELA SAMPAIO")
     
     def header(self):
         # Logo/Marca Dourada
         self.set_font('Arial', 'B', 16)
         self.set_text_color(212, 175, 55) # Dourado
-        self.cell(0, 10, 'MICAELA SAMPAIO', 0, 1, 'C')
+        self.cell(0, 10, self.company_name.upper(), 0, 1, 'C')
         
         self.set_font('Arial', 'I', 10)
         self.set_text_color(100, 100, 100) # Cinza
@@ -86,7 +90,15 @@ def generate_contract_pdf(contract_data: dict) -> bytes:
     try:
         # Criar PDF
         signature_data = contract_data.get('signature_data')
-        pdf = ContractPDF('P', 'mm', 'A4', signature_data=signature_data)
+        
+        # Extrair dados da empresa
+        company_data = {
+            'contratada_nome': contract_data.get('contratada_nome'),
+            'contratada_nif': contract_data.get('contratada_nif'),
+            'contratada_endereco': contract_data.get('contratada_endereco')
+        }
+        
+        pdf = ContractPDF('P', 'mm', 'A4', signature_data=signature_data, company_data=company_data)
         pdf.alias_nb_pages()
         pdf.add_page()
         pdf.set_margins(20, 20, 20)

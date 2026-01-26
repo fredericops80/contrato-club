@@ -34,6 +34,24 @@ class Database:
                 created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
             )
         ''')
+
+        # Tabela de Configurações (Dados da Contratada)
+        cursor.execute('''
+            CREATE TABLE IF NOT EXISTS settings (
+                key TEXT PRIMARY KEY,
+                value TEXT
+            )
+        ''')
+        
+        # Inserir dados padrão se não existirem
+        default_settings = {
+            'contratada_nome': 'MICAELA SAMPAIO',
+            'contratada_nif': 'NIF_PENDENTE',
+            'contratada_endereco': 'ENDERECO_PENDENTE'
+        }
+        
+        for key, value in default_settings.items():
+            cursor.execute('INSERT OR IGNORE INTO settings (key, value) VALUES (?, ?)', (key, value))
         
         conn.commit()
         conn.close()
@@ -148,3 +166,20 @@ class Database:
             return dict(zip(columns, row))
         
         return None
+
+    def get_setting(self, key: str) -> str:
+        """Retorna o valor de uma configuração"""
+        conn = self.get_connection()
+        cursor = conn.cursor()
+        cursor.execute('SELECT value FROM settings WHERE key = ?', (key,))
+        result = cursor.fetchone()
+        conn.close()
+        return result[0] if result else ""
+
+    def set_setting(self, key: str, value: str):
+        """Atualiza o valor de uma configuração"""
+        conn = self.get_connection()
+        cursor = conn.cursor()
+        cursor.execute('INSERT OR REPLACE INTO settings (key, value) VALUES (?, ?)', (key, value))
+        conn.commit()
+        conn.close()

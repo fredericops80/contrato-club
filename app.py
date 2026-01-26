@@ -74,71 +74,136 @@ st.markdown("""
     .stTextInput > div > div > input,
     .stSelectbox > div > div > select,
     .stTextArea > div > div > textarea {
-        border-radius: 10px !important;
-        border: 1px solid #E5E5E5 !important;
+        border-radius: 8px !important;
+        border: 1px solid #CCCCCC !important; /* Cinza mais suave */
         padding: 12px 16px !important;
         font-size: 1rem !important;
+        font-weight: 500 !important;
         background-color: #FFFFFF !important;
-        color: #333333 !important;
-        -webkit-text-fill-color: #333333 !important;
+        color: #222222 !important; /* Preto suave para leitura */
         caret-color: #D4AF37;
-        box-shadow: 0 2px 4px rgba(0,0,0,0.05) !important;
-        transition: all 0.3s ease !important;
+        box-shadow: none !important; /* Remover sombras escuras */
+        transition: border 0.2s ease !important;
+    }
+
+    /* FIX CRÍTICO: Forçar fundo branco no Autocomplete do Navegador */
+    input:-webkit-autofill,
+    input:-webkit-autofill:hover, 
+    input:-webkit-autofill:focus, 
+    input:-webkit-autofill:active {
+        -webkit-box-shadow: 0 0 0 30px white inset !important;
+        -webkit-text-fill-color: #222222 !important;
+        transition: background-color 5000s ease-in-out 0s;
     }
 
     /* Estilo do Placeholder */
     ::placeholder {
-        color: #999999 !important;
-        opacity: 1; /* Firefox */
+        color: #888888 !important;
+        font-weight: 400 !important;
+        opacity: 1;
     }
     
-    /* Ajuste específico para Inputs do Streamlit (Webkit) */
     input::-webkit-input-placeholder, textarea::-webkit-input-placeholder {
-        color: #999999 !important;
+        color: #888888 !important;
+        font-weight: 400 !important;
     }
     
     .stTextInput > div > div > input:focus,
     .stSelectbox > div > div > select:focus,
     .stTextArea > div > div > textarea:focus {
         border-color: #D4AF37 !important;
-        box-shadow: 0 4px 8px rgba(212, 175, 55, 0.2) !important;
+        background-color: #FFFFFF !important;
+        box-shadow: 0 0 0 1px #D4AF37 !important;
+        outline: none !important;
+        color: #222222 !important;
     }
     
     /* Labels dos inputs */
     .stTextInput > label,
     .stSelectbox > label,
     .stTextArea > label {
-        font-weight: 500 !important;
-        color: #333333 !important;
+        font-family: 'Montserrat', sans-serif !important;
+        font-weight: 600 !important;
+        color: #222222 !important;
         font-size: 0.95rem !important;
         margin-bottom: 0.5rem !important;
     }
+
+    /* FIX para o Canvas de Assinatura */
+    iframe {
+        background-color: #FFFFFF !important;
+        border: 1px solid #E5E5E5 !important;
+        border-radius: 12px !important;
+    }
     
     /* Botões Premium */
+    /* ========================================================= */
+    /* BOTÕES - ESTILO GERAL E CARDS (DEFAULT)                  */
+    /* ========================================================= */
+    /* Por padrão, todo botão é um CARD BRANCO CLICÁVEL         */
     .stButton > button {
+        background-color: #FFFFFF !important;
+        color: #1A1A1A !important; /* Cor escura forte */
+        border: 2px solid #E5E5E5 !important;
+        border-radius: 12px !important;
+        padding: 16px 20px !important;
+        font-size: 1rem !important;
+        font-weight: 600 !important;
+        
+        /* Layout flexível */
+        width: 100% !important;
+        height: auto !important;
+        white-space: pre-wrap !important; /* Permitir quebras de linha */
+        line-height: 1.4 !important;
+        
+        /* Sombra suave */
+        box-shadow: 0 2px 6px rgba(0,0,0,0.05) !important;
+        transition: all 0.2s ease-in-out !important;
+    }
+
+    /* Hover no card padrão */
+    .stButton > button:hover {
+        border-color: #D4AF37 !important; /* Borda dourada */
+        background-color: #FFFCF5 !important; /* Fundo levemente creme */
+        color: #D4AF37 !important; /* Texto dourado */
+        transform: translateY(-2px) !important;
+        box-shadow: 0 4px 12px rgba(212, 175, 55, 0.15) !important;
+    }
+
+    /* Active/Click no card padrão */
+    .stButton > button:active {
+        background-color: #F8F8F8 !important;
+        transform: translateY(1px) !important;
+        box-shadow: none !important;
+    }
+
+    /* ========================================================= */
+    /* BOTÕES DE AÇÃO PRINCIPAL (PRIMARY) - CONTINUAR/FINALIZAR  */
+    /* ========================================================= */
+    /* Alvo específico para botões type="primary" e fallback     */
+    .stButton > button[kind="primary"],
+    .stButton > button[data-testid="baseButton-primary"] {
         background: linear-gradient(135deg, #D4AF37 0%, #C5A065 100%) !important;
         color: #FFFFFF !important;
         border: none !important;
-        border-radius: 25px !important;
-        padding: 14px 32px !important;
-        font-size: 1rem !important;
-        font-weight: 600 !important;
+        border-radius: 30px !important; /* Mais arredondado */
+        padding: 14px 40px !important;  
+        
         text-transform: uppercase !important;
-        letter-spacing: 1px !important;
-        box-shadow: 0 4px 12px rgba(212, 175, 55, 0.3) !important;
-        transition: all 0.3s ease !important;
-        width: 100% !important;
-        margin-top: 1rem !important;
+        letter-spacing: 1.5px !important;
+        font-weight: 700 !important;
+        
+        box-shadow: 0 6px 16px rgba(212, 175, 55, 0.3) !important;
     }
-    
-    .stButton > button:hover {
-        background: linear-gradient(135deg, #C5A065 0%, #B8935A 100%) !important;
-        box-shadow: 0 6px 16px rgba(212, 175, 55, 0.4) !important;
-        transform: translateY(-2px) !important;
-    }
-    
-    .stButton > button:active {
-        transform: translateY(0) !important;
+
+    /* Hover no botão primário */
+    .stButton > button[kind="primary"]:hover,
+    .stButton > button[data-testid="baseButton-primary"]:hover {
+        background: linear-gradient(135deg, #E5C048 0%, #D4AF37 100%) !important;
+        box-shadow: 0 8px 20px rgba(212, 175, 55, 0.4) !important;
+        transform: translateY(-3px) !important;
+        color: #FFFFFF !important;
+        border: none !important;
     }
     
     /* Radio buttons - Seleção de planos */
@@ -345,62 +410,91 @@ def get_plan_card(plan_name: str, info: dict) -> str:
 
 if st.session_state.view == 'admin':
     # ============================================
-    # PAINEL ADMINISTRATIVO
+    # AREA ADMINISTRATIVA
     # ============================================
-    
-    st.markdown("# 🔐 Painel Administrativo")
-    st.markdown("---")
-    
-    # Botão de logout
-    col1, col2, col3 = st.columns([6, 1, 1])
-    with col3:
-        if st.button("Sair"):
+    col_logo, col_logout = st.columns([6, 1])
+    with col_logo:
+        st.title("Painel Admin 🔐")
+    with col_logout:
+        if st.button("Sair", key="btn_logout"):
             st.session_state.view = 'client'
-            reset_client_flow()
+            st.session_state.step = 'identity'
             st.rerun()
+            
+    # Navegação por Abas (Melhor que sidebar neste caso)
+    tab_contratos, tab_config = st.tabs(["📋 Contratos Gerados", "⚙️ Configurações da Empresa"])
+
+    with tab_contratos:
+        st.markdown("### 🔍 Pesquisar Contratos")
+        
+        # Filtro de busca
+        search = st.text_input("Buscar por nome do cliente", label_visibility="collapsed", placeholder="Digite o nome do cliente...")
+        
+        if search:
+            contracts = db.search_contracts(search)
+        else:
+            contracts = db.get_all_contracts()
+            
+        if not contracts:
+            st.info("Nenhum contrato encontrado.")
+        else:
+            # Exibir tabela simplificada
+            df_display = pd.DataFrame(contracts)
+            st.dataframe(
+                df_display[['contract_number', 'nome', 'plano', 'created_at']],
+                column_config={
+                    "contract_number": "Nº Contrato",
+                    "nome": "Cliente",
+                    "plano": "Plano",
+                    "created_at": "Data"
+                },
+                hide_index=True,
+                use_container_width=True
+            )
+            
+            st.markdown("---")
+            st.markdown("### 📥 Baixar Contrato")
+            contract_numbers = [c['contract_number'] for c in contracts]
+            selected_contract = st.selectbox("Selecione o contrato", contract_numbers)
+            
+            if st.button("Gerar PDF"):
+                contract_data = db.get_contract_by_number(selected_contract)
+                if contract_data:
+                    contract_data['numero_contrato'] = contract_data['contract_number']
+                    
+                    # Injetar dados da contratada do banco
+                    contratada_info = {
+                        'contratada_nome': db.get_setting('contratada_nome'),
+                        'contratada_nif': db.get_setting('contratada_nif'),
+                        'contratada_endereco': db.get_setting('contratada_endereco')
+                    }
+                    contract_data.update(contratada_info)
+                    
+                    pdf_bytes = generate_contract_pdf(contract_data)
+                    
+                    st.download_button(
+                        label="⬇️ Baixar PDF",
+                        data=pdf_bytes,
+                        file_name=f"{selected_contract}.pdf",
+                        mime="application/pdf",
+                        type="primary"
+                    )
     
-    # Busca
-    st.markdown("### Pesquisar Contratos")
-    search_term = st.text_input("Buscar por nome do cliente", placeholder="Digite o nome...")
-    
-    # Obter contratos
-    if search_term:
-        contracts = db.search_contracts(search_term)
-    else:
-        contracts = db.get_all_contracts()
-    
-    if contracts:
-        st.markdown(f"### 📋 Total de Contratos: {len(contracts)}")
+    with tab_config:
+        st.markdown("### ⚙️ Dados da Contratada")
+        st.markdown("Estes dados aparecerão no cabeçalho e corpo de todos os novos contratos.")
         
-        # Criar DataFrame
-        df = pd.DataFrame(contracts)
-        df['created_at'] = pd.to_datetime(df['created_at']).dt.strftime('%d/%m/%Y %H:%M')
-        
-        # Exibir em formato de tabela limpa
-        display_df = df[['contract_number', 'nome', 'plano', 'email', 'created_at']]
-        display_df.columns = ['Número', 'Nome', 'Plano', 'Email', 'Data']
-        
-        st.dataframe(display_df, use_container_width=True, hide_index=True)
-        
-        # Opção de download individual
-        st.markdown("### 📥 Baixar Contrato")
-        contract_numbers = df['contract_number'].tolist()
-        selected_contract = st.selectbox("Selecione o contrato", contract_numbers)
-        
-        if st.button("Gerar PDF"):
-            contract_data = db.get_contract_by_number(selected_contract)
-            if contract_data:
-                contract_data['numero_contrato'] = contract_data['contract_number']
-                pdf_bytes = generate_contract_pdf(contract_data)
-                
-                st.download_button(
-                    label="⬇️ Baixar PDF",
-                    data=pdf_bytes,
-                    file_name=f"{selected_contract}.pdf",
-                    mime="application/pdf"
-                )
-    else:
-        st.info("Nenhum contrato encontrado.")
+        with st.form("settings_form"):
+            c_nome = st.text_input("Nome da Contratada/Empresa", value=db.get_setting('contratada_nome'))
+            c_nif = st.text_input("NIF", value=db.get_setting('contratada_nif'))
+            c_endereco = st.text_input("Endereço Completo", value=db.get_setting('contratada_endereco'))
+            
+            if st.form_submit_button("Salvar Alterações", type="primary"):
+                db.set_setting('contratada_nome', c_nome)
+                db.set_setting('contratada_nif', c_nif)
+                db.set_setting('contratada_endereco', c_endereco)
+                st.success("✅ Dados atualizados com sucesso!")
+                st.rerun()
 
 else:
     # ============================================
@@ -440,7 +534,7 @@ else:
         
         st.markdown("<br>", unsafe_allow_html=True)
         
-        if st.button("CONTINUAR"):
+        if st.button("CONTINUAR", type="primary"):
             # Validação simples
             if not all([nome, nif, email, whatsapp, endereco]):
                 st.error("Por favor, preencha todos os campos obrigatórios.")
@@ -464,40 +558,29 @@ else:
         st.markdown("### Escolha o plano ideal para você")
         st.markdown("<br>", unsafe_allow_html=True)
         
-        # Exibir cards de planos
-        for plano, info in PLANOS.items():
-            st.markdown(get_plan_card(plano, info), unsafe_allow_html=True)
+        # Grid de Planos Clicáveis
+        col1, col2 = st.columns(2)
+        cols = [col1, col2]
+        
+        # Iterar sobre os planos e criar botões
+        for i, (key, info) in enumerate(PLANOS.items()):
+            with cols[i % 2]:
+                # Criar label formatada
+                label = f"{info['nome_display']}\n{info['valor_mensal']}€/mês"
+                if info.get('economia_anual'):
+                    label += f"\n(Economia: {info['economia_anual']}€)"
+                
+                # Botão Card (Secondary) que seleciona e avança
+                if st.button(label, key=f"btn_{key}", use_container_width=True, type="secondary"):
+                    st.session_state.form_data['plano'] = key
+                    st.session_state.step = 'signature'
+                    st.rerun()
         
         st.markdown("<br>", unsafe_allow_html=True)
         
-        plano_selecionado = st.radio(
-            "Selecione seu plano:",
-            list(PLANOS.keys()),
-            label_visibility="hidden"
-        )
-        
-        # Feedback visual - mostrar economia
-        if plano_selecionado:
-            economia = PLANOS[plano_selecionado].get('economia_anual', 0)
-            if economia > 0:
-                st.markdown(f"""
-                <div class="economia-box">
-                    <p>🎉 Excelente escolha! Você vai economizar {economia}€ por ano com o plano {PLANOS[plano_selecionado]['nome_display']}!</p>
-                </div>
-                """, unsafe_allow_html=True)
-        
-        col1, col2 = st.columns(2)
-        
-        with col1:
-            if st.button("⬅️ VOLTAR"):
-                st.session_state.step = 'identity'
-                st.rerun()
-        
-        with col2:
-            if st.button("CONTINUAR"):
-                st.session_state.form_data['plano'] = plano_selecionado
-                st.session_state.step = 'signature'
-                st.rerun()
+        if st.button("⬅️ VOLTAR"):
+            st.session_state.step = 'identity'
+            st.rerun()
     
     # ============================================
     # STEP 3: CONTRATO E ASSINATURA
@@ -510,6 +593,14 @@ else:
         # Gerar número de contrato temporário para visualização
         temp_contract_data = st.session_state.form_data.copy()
         temp_contract_data['numero_contrato'] = 'CTR-2024-PREVIEW'
+        
+        # Injetar dados da contratada do banco para o preview
+        contratada_info = {
+            'contratada_nome': db.get_setting('contratada_nome'),
+            'contratada_nif': db.get_setting('contratada_nif'),
+            'contratada_endereco': db.get_setting('contratada_endereco')
+        }
+        temp_contract_data.update(contratada_info)
         
         # Mostrar contrato
         contrato_texto = get_contrato_completo(temp_contract_data)
@@ -540,7 +631,7 @@ else:
                 st.rerun()
         
         with col2:
-            if st.button("FINALIZAR ADESÃO"):
+            if st.button("FINALIZAR ADESÃO", type="primary"):
                 # Validar assinatura
                 if canvas_result.image_data is None:
                     st.error("Por favor, assine o contrato antes de finalizar.")
@@ -595,6 +686,15 @@ else:
         contract_data = db.get_contract_by_number(st.session_state.contract_number)
         if contract_data:
             contract_data['numero_contrato'] = contract_data['contract_number']
+            
+            # Injetar dados da contratada do banco para o PDF final
+            contratada_info = {
+                'contratada_nome': db.get_setting('contratada_nome'),
+                'contratada_nif': db.get_setting('contratada_nif'),
+                'contratada_endereco': db.get_setting('contratada_endereco')
+            }
+            contract_data.update(contratada_info)
+            
             pdf_bytes = generate_contract_pdf(contract_data)
             
             col1, col2, col3 = st.columns([1, 2, 1])
