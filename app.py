@@ -79,8 +79,22 @@ st.markdown("""
         padding: 12px 16px !important;
         font-size: 1rem !important;
         background-color: #FFFFFF !important;
+        color: #333333 !important;
+        -webkit-text-fill-color: #333333 !important;
+        caret-color: #D4AF37;
         box-shadow: 0 2px 4px rgba(0,0,0,0.05) !important;
         transition: all 0.3s ease !important;
+    }
+
+    /* Estilo do Placeholder */
+    ::placeholder {
+        color: #999999 !important;
+        opacity: 1; /* Firefox */
+    }
+    
+    /* Ajuste específico para Inputs do Streamlit (Webkit) */
+    input::-webkit-input-placeholder, textarea::-webkit-input-placeholder {
+        color: #999999 !important;
     }
     
     .stTextInput > div > div > input:focus,
