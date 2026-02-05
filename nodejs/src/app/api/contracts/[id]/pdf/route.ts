@@ -39,12 +39,15 @@ export async function GET(
 
         const filename = `${contract.contract_number}.pdf`;
 
-        return new NextResponse(pdfBytes, {
+        // Convert Uint8Array to Buffer for proper NextResponse handling
+        const pdfBuffer = Buffer.from(pdfBytes);
+
+        return new NextResponse(pdfBuffer, {
             status: 200,
             headers: {
                 'Content-Type': 'application/pdf',
                 'Content-Disposition': `inline; filename="${filename}"; filename*=UTF-8''${encodeURIComponent(filename)}`,
-                'Content-Length': pdfBytes.length.toString(),
+                'Content-Length': pdfBuffer.length.toString(),
                 'Cache-Control': 'no-cache, no-store, must-revalidate',
             }
         });
