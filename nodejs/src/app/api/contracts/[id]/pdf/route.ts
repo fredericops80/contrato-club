@@ -139,7 +139,7 @@ async function generateContractPDF(data: ContractPDFData): Promise<Uint8Array> {
     });
 
     y -= 18;
-    page.drawText('CLUBE + ESTÉTICA 3.0', {
+    page.drawText('CLUBE + ESTÉTICA 4.0', {
         x: margin,
         y,
         size: 12,

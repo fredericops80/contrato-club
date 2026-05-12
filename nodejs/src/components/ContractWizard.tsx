@@ -130,7 +130,7 @@ export default function ContractWizard() {
             {/* Header */}
             <header className="header">
                 <h1 className="header-title">✨ Micaela Sampaio</h1>
-                <p className="header-subtitle">Bem-vinda ao Clube + Estética 3.0</p>
+                <p className="header-subtitle">Bem-vinda ao Clube + Estética 4.0</p>
             </header>
 
             {/* Step 1: Identity */}
@@ -304,7 +304,7 @@ export default function ContractWizard() {
                             Número do Contrato: <strong>{contractNumber}</strong>
                         </p>
                         <p style={{ marginTop: '1rem' }}>
-                            Bem-vinda ao Clube + Estética 3.0! 💎
+                            Bem-vinda ao Clube + Estética 4.0! 💎
                         </p>
                     </div>
 
